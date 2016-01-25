@@ -1,16 +1,80 @@
-<div layout="row" layout-align="center center" style="height: 100%;background: yellow;">
-
-    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-        <md-tab label="SIGN UP">
-            <div class="login-card">
-
-            </div>
-        </md-tab>
-        <md-tab label="SIGN IN">
-            <div class="login-card">
-
-            </div>
-        </md-tab>
-    </md-tabs>
-
+<div layout="row" class="page-header">
+	<ng-md-icon icon="menu" class="option-icon"></ng-md-icon>
+	<div class="page-header-text">
+		<span class="text-white">stamper</span>
+		<span class="text-theme">manager</span>
+	</div>
+</div>
+<div layout="row" layout-align="center center" style="height:100%">
+	<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+		<md-tab label="SIGN UP">
+			<div class="login-card">
+				<md-content class="md-padding">
+					<form name="registrationForm" novalidate>
+						<md-input-container md-no-float class="md-block">
+							<input ng-model="registerData.businessName" name="businessName" type="text" placeholder="Business Name" required>
+							<div ng-messages="registrationForm.businessName.$error">
+								<div ng-message="required" class="error">
+									Business Name is required
+								</div>
+							</div>
+						</md-input-container>
+						<md-input-container md-no-float class="md-block">
+							<input ng-model="registerData.email" name="email" type="email" placeholder="Email" required>
+							<div ng-messages="registrationForm.email.$error">
+								<div ng-message="required" class="error">
+									Email is required
+								</div>
+								<div ng-message="email" class="error">
+									Enter valid email
+								</div>
+							</div>
+						</md-input-container>
+						<div class="text-center">
+							<md-button ng-click="doRegister()" class="full-width">SIGN UP</md-button>
+						</div>
+					</form>
+				</md-content>
+			</div>
+		</md-tab>
+		<md-tab label="SIGN IN">
+			<div class="login-card">
+				<md-content class="md-padding">
+					<form name="loginForm" novalidate>
+						<md-input-container md-no-float class="md-block">
+							<input ng-model="loginData.email" name="email" type="email" placeholder="Email" required>
+							<div ng-messages="loginForm.email.$error">
+								<div ng-message="required" class="error">
+									Email is required
+								</div>
+								<div ng-message="email" class="error">
+									Enter valid email
+								</div>
+							</div>
+						</md-input-container>
+						<md-input-container md-no-float class="md-block">
+							<input ng-model="loginData.password" name="password" type="password" placeholder="Password" required>
+							<div ng-messages="loginForm.password.$error">
+								<div ng-message="required" class="error">
+									Password is required
+								</div>
+							</div>
+						</md-input-container>
+						<a class="forgot" ui-sref="forgotPassword">Forgot?</a>
+						<div class="text-center">
+							<md-button class="full-width" ng-click="doLogin()">SIGN IN</md-button>
+						</div>
+					</form>
+				</md-content>
+			</div>
+		</md-tab>
+	</md-tabs>
+</div>
+<div class="bottom-section">
+	<md-list-item layout="row" layout-align="center center" class="md-3-line">
+		<div class="md-list-item-text">
+			<p class="bottom-notification">Hey, welcome to Stampr Manager, you can contact us here when ever you need support, guidence or just want to leave us some feedback on the product.</p>
+		</div>
+		<img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar avatar-right" />
+	</md-list-item>
 </div>

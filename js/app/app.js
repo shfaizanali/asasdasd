@@ -1,6 +1,12 @@
 var module;
 
-module = angular.module('manager', ['ui.router','ngMaterial','app.routes','auth.controllers']);
+module = angular.module('manager', ['ui.router',
+                                    'ngMaterial',
+                                    'app.routes',
+                                    'ngMessages',
+                                    'ngMdIcons',
+                                    'auth.controllers',
+                                    'dash.controllers']);
 
 module.constant('API_URL', 'http://staging.api.stamprapp.com');
 module.constant('WS_URL', 'ws://staging.api.stamprapp.com:8500');
@@ -10,7 +16,7 @@ module.run(function() {
 
 });
 
-module.config(function($httpProvider, $sceDelegateProvider,$mdThemingProvider,$stateProvider,$urlRouterProvider) {
+module.config( function ($httpProvider, $sceDelegateProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
@@ -36,12 +42,7 @@ module.config(function($httpProvider, $sceDelegateProvider,$mdThemingProvider,$s
             'contrastLightColors': undefined
         });
 
-
-        $mdThemingProvider.theme('default')
-            .primaryPalette('stamprPink')
-
-
-
+        $mdThemingProvider.theme('default').primaryPalette('stamprPink')
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
             'http://api.stamprapp.com/**'

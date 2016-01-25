@@ -1,20 +1,211 @@
 body, html {
-    height: 100%;
+	height: 100%;
 }
 
-.login-card
-{
-    color: white;
-    background: white;
-    height: 294px;
-    width:352px;
+body {
+	background: #3D1C22;
 }
-.md-tab.md-active
-{
-    background-color: white;
+
+.login-card {
+	color: white;
+	background: white;
+	width: 400px;
 }
-md-tabs .md-tab
-{
-    background-color: #ebebeb;
-    color: #9fa2a4;
+
+.md-tab.md-active {
+	background-color: white;
+}
+
+md-tabs .md-tab {
+	background-color: #ebebeb;
+	color: #9fa2a4;
+}
+
+.md-button {
+	background: #e91e63;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.md-button:not([disabled]):hover {
+	background: #e91e63;
+}
+
+.text-center {
+	text-align: center;
+}
+
+md-ink-bar {
+	display: none;
+}
+
+md-tabs[md-border-bottom] md-tabs-wrapper {
+	border-style: none;
+}
+
+a {
+	text-decoration: none;
+	font-size: 12px;
+	color: #9fa2a4;
+}
+
+.forgot {
+	position: absolute;
+	margin-top: -66px;
+	right: 13px;
+	margin-right: 5px;
+}
+
+.page-header {
+	position: absolute;
+}
+
+.page-header-text {
+	padding-left: 35px;
+	padding-top: 6px;
+	font-size: 25px;
+}
+
+.option-icon {
+	fill: #ffffff;
+	margin-left: 15px;
+	margin-top: 9px;
+}
+
+.text-white {
+	color: #ffffff;
+}
+
+.text-theme {
+	color: #e91e63;
+}
+
+.bottom-notification {
+	width: 276px;
+	background: #ffffff;
+	font-size: 11px !important;
+	border-radius: 7px;
+	padding: 5px 15px;
+	text-align: justify;
+}
+
+.bottom-section {
+	position: absolute;
+	bottom: 2px;
+	right: 0px;
+}
+
+.full-width {
+	width: 100%;
+	padding: 6px 6px;
+	margin: 6px 0px;
+}
+
+.grey-header {
+	text-align: center;
+	background: #ebebeb;
+	color: #000000;
+	padding: 14px 0px;
+	font-size: 14px;
+}
+
+.avatar-right {
+	margin-top: auto !important;
+	margin-bottom: auto !important;
+	margin-left: 5px;
+	margin-right: 2px !important;
+}
+
+.button-bottom-text {
+	font-size: 12px;
+	color: #9fa2a4;
+	padding: 10px 0px;
+}.
+
+.point {
+	cursor: pointer !important;
+}
+
+.starbucks-header {
+	font-size: 44px;
+}
+
+.starbuck-content {
+	margin-top: 10px;
+	font-size: 18px;
+	line-height: 31px;
+	width: 600px;
+	text-align: center;
+}
+
+md-dialog {
+	overflow: visible;
+	width: 552px;
+	height: 296px;
+}
+
+.no-background {
+	background: transparent;
+}
+
+.dialog-top {
+	padding: 0px 0px;
+	position: absolute;
+	margin-top: -65px;
+	color: #ffffff;
+	font-size: 16px;
+	letter-spacing: 0.2px;
+	text-align: center;
+	width: 100%;
+}
+
+.custom-avatar {
+	width: 111px;
+	border-radius: 50%;
+	margin: 34px 0px;
+}
+
+.username {
+	font-size: 30px;
+	letter-spacing: 0.6px;
+}
+
+.circular-border {
+	position: absolute;
+	margin-top: -154px;
+	margin-left: -61px;
+	border: 2px;
+}
+
+.dialog-pink {
+	background: #E91E63;
+}
+
+md-progress-circular .md-spinner-wrapper .md-inner .md-left .md-half-circle, md-progress-circular .md-spinner-wrapper .md-inner .md-right .md-half-circle {
+	border-width: 4px;
+}
+
+md-progress-circular .md-spinner-wrapper .md-inner .md-gap {
+	border-top-width: 4px;
+}
+
+md-progress-circular.md-default-theme .md-inner .md-gap, md-progress-circular .md-inner .md-gap {
+	border-top-color: #B2B2B2;
+	border-bottom-color: #B2B2B2;
+}
+
+md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle {
+	border-left-color: #B2B2B2;
+}
+
+md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle, md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+	border-top-color: #B2B2B2;
+}
+
+md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+	border-right-color: #B2B2B2;
+}
+
+md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle, md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+	border-top-color: #B2B2B2;
 }
