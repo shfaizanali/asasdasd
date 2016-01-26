@@ -1,0 +1,7 @@
+local_cafe
+local_drink
+done
+done_all
+verified_user
+check
+check_box

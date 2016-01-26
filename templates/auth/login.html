@@ -8,11 +8,12 @@
 <div layout="row" layout-align="center center" style="height:100%">
 	<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
 		<md-tab label="SIGN UP">
+			<md-progress-linear md-mode="indeterminate" ng-if="loading"></md-progress-linear>
 			<div class="login-card">
 				<md-content class="md-padding">
 					<form name="registrationForm" novalidate>
 						<md-input-container md-no-float class="md-block">
-							<input ng-model="registerData.businessName" name="businessName" type="text" placeholder="Business Name" required>
+							<input ng-model="registerData.business_name" name="businessName" type="text" placeholder="Business Name" required>
 							<div ng-messages="registrationForm.businessName.$error">
 								<div ng-message="required" class="error">
 									Business Name is required
@@ -30,7 +31,16 @@
 								</div>
 							</div>
 						</md-input-container>
+						<md-input-container md-no-float class="md-block">
+							<input ng-model="registerData.password" name="password" type="password" placeholder="Password" required>
+							<div ng-messages="registrationForm.password.$error">
+								<div ng-message="required" class="error">
+									Password is required
+								</div>
+							</div>
+						</md-input-container>
 						<div class="text-center">
+							<p ng-if="registerMessage" class="error">{{ registerMessage }}</p>
 							<md-button ng-click="doRegister()" class="full-width">SIGN UP</md-button>
 						</div>
 					</form>
@@ -38,6 +48,7 @@
 			</div>
 		</md-tab>
 		<md-tab label="SIGN IN">
+			<md-progress-linear md-mode="indeterminate" ng-if="loading"></md-progress-linear>
 			<div class="login-card">
 				<md-content class="md-padding">
 					<form name="loginForm" novalidate>
@@ -62,6 +73,7 @@
 						</md-input-container>
 						<a class="forgot" ui-sref="forgotPassword">Forgot?</a>
 						<div class="text-center">
+							<p ng-if="loginMessage" class="error">{{ loginMessage }}</p>
 							<md-button class="full-width" ng-click="doLogin()">SIGN IN</md-button>
 						</div>
 					</form>
