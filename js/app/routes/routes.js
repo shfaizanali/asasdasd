@@ -10,10 +10,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl: "templates/auth/login.html"
 		})
 
-		.state('starbucks', {
-			url: "/starbucks",
-			controller:'starbucksCtrl',
-			templateUrl: "templates/dashboard/starbucks.html"
+		.state('dashboard', {
+			url: "/dashboard",
+			controller:'DashboardCtrl',
+			templateUrl: "templates/dashboard/dashboard.html"
 		})
 
 		.state('forgotPassword', {
@@ -22,5 +22,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl: "templates/auth/forgotPassword.html"
 		});
 
-		$urlRouterProvider.otherwise('/login');
+		if (localStorage.getItem('userToken')) {
+			$urlRouterProvider.otherwise('/dashboard');
+		}
+		else {
+			$urlRouterProvider.otherwise('/login');
+		}
 });

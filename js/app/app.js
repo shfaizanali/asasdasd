@@ -20,7 +20,11 @@ module.constant('API_URLS', {
 	forgotPassword: 'accounts/forget_password/'
 });
 
-module.run(function() {});
+module.run(function (socket) {
+	if (localStorage.getItem('userToken')) {
+		var connected_socket = socket.connect();
+	}
+});
 
 module.config( function ($httpProvider, $sceDelegateProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider) {
 	$httpProvider.defaults.useXDomain = true;

@@ -24,6 +24,7 @@ body, html {
 
 body {
 	background: #3D1C22;
+	overflow: hidden;
 }
 
 input {
@@ -164,10 +165,6 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 	font-size: 12px;
 	color: #9fa2a4;
 	padding: 10px 0px;
-}.
-
-.point {
-	cursor: pointer !important;
 }
 
 .starbucks-header {
@@ -182,37 +179,26 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 	text-align: center;
 }
 
-md-dialog {
-	overflow: visible;
-	width: 552px;
-	height: 296px;
-}
-
-.no-background {
-	background: transparent;
-}
-
 .dialog-top {
-	padding: 0px 0px;
-	position: absolute;
-	margin-top: -65px;
 	color: #ffffff;
 	font-family: 'Opensans-Semibold';
 	font-size: 16px;
 	letter-spacing: 0.2px;
 	text-align: center;
 	width: 100%;
+	padding: 40px 0px;
+	margin-top: 20px;
 }
 
 .custom-avatar {
-	width: 111px;
+	width: 131px;
 	border-radius: 50%;
 	margin: 34px 0px;
 }
 
 .shadow {
-	width: 111px;
-	height: 111px;
+	width: 131px;
+	height: 131px;
 	border-radius: 50%;
 	background: #000000;
 	position: absolute;
@@ -229,9 +215,14 @@ md-dialog {
 
 .circular-border {
 	position: absolute;
-	margin-top: -154px;
-	margin-left: -61px;
+	margin-top: -174px;
+	margin-left: 206px;
 	border: 2px;
+}
+
+.progress-container {
+	position: relative;
+	height: auto;
 }
 
 .dialog-pink {
@@ -243,6 +234,42 @@ md-dialog {
 	color: rgb(221, 44, 0);
 	font-size: 11px;
 	padding: 10px 0px;
+}
+
+#card-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	top: 0;
+}
+
+#card-container {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.card-item {
+	width: 552px;
+	height: 296px;
+	background: #ffffff;
+	border-radius: 4px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+}
+
+.cards-list {
+	overflow: auto;
+	height: calc(100vh - 100px);
+}
+
+.hide {
+	display: none;
+}
+
+::-webkit-scrollbar { 
+	display: none !important; 
 }
 
 md-progress-circular .md-spinner-wrapper .md-inner .md-left .md-half-circle, md-progress-circular .md-spinner-wrapper .md-inner .md-right .md-half-circle {

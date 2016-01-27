@@ -17,3 +17,25 @@
 		<img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar avatar-right" />
 	</md-list-item>
 </div>
+
+<div id="card-overlay" class="text-center hide">
+	<div id="card-container">
+		<div class="dialog-top">
+			Tap a card to select the user
+		</div>
+		<div class="cards-list">
+			<div ng-repeat="card in cards" ng-if="cards.length" class="card-item">
+				<div>
+					<img src="{{card.image}}" class="custom-avatar" ng-cloak/>
+					<div class="progress-container">
+						<md-progress-circular md-mode="determinate" value="{{card.stamps}}" md-diameter="140px" class="circular-border"></md-progress-circular>
+					</div>
+				</div>
+				<div class="username">
+					{{ card.name }}
+				</div>
+				<md-button ng-click="removeCard(card.request_id)" class="full-width">REMOVE CARD</md-button>
+			</div>
+		</div>
+	</div>
+</div>

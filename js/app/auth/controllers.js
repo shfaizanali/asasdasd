@@ -21,7 +21,7 @@ auth.controller('LoginCtrl', function ($scope, $state, Authentication) {
 				localStorage.setItem('userId', res.user.id);
 				localStorage.setItem('userEmail', res.user.email);
 				localStorage.setItem('businessName', res.user.business_name);
-				$state.go('starbucks');
+				$state.go('dashboard');
 			}
 		}, function (err) {
 			$scope.loading = false;
@@ -41,7 +41,7 @@ auth.controller('LoginCtrl', function ($scope, $state, Authentication) {
 			else {
 				$scope.loginMessage = "";
 				localStorage.setItem('userToken', res.token);
-				$state.go('starbucks');
+				$state.go('dashboard');
 			}
 		}, function (err) {
 			$scope.loading = false;

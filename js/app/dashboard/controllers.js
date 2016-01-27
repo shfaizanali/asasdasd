@@ -1,44 +1,51 @@
 var dash = angular.module('dash.controllers', []);
 
-dash.controller('starbucksCtrl', function ($scope, $mdDialog, $mdMedia) {
+dash.controller('DashboardCtrl', function ($scope, $rootScope) {
+	$scope.userProgress = 80;
+	$scope.cards = [];
+
 	$scope.showDialog = function (ev) {
-		var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-		
-		$mdDialog.show({
-			controller: DialogController,
-			templateUrl: 'templates/dialogs/userStamp.html',
-			parent: angular.element(document.body),
-			targetEvent: ev,
-			clickOutsideToClose: true,
-			fullscreen: useFullScreen
-		})
-		.then(function (answer) {
-			console.log(answer);
-			$scope.status = 'You said the information was "' + answer + '".';
-		}, function() {
-			$scope.status = 'You cancelled the dialog.';
-		});
-		
-		$scope.$watch(function() {
-			return $mdMedia('xs') || $mdMedia('sm');
-		}, function(wantsFullScreen) {
-			$scope.customFullscreen = (wantsFullScreen === true);
-		});
+		// $('#card-overlay').show();
 	};
 
-	function DialogController($scope, $mdDialog) {
-		$scope.userProgress = 70;
-
-		$scope.hide = function() {
-			$mdDialog.hide();
-		};
-		
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-		
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
+	$scope.removeCard = function (request_id) {
+		if ($scope.cards.length) {
+			$scope.cards.forEach(function (item, i) {
+				if (item.request_id == request_id) {
+					$scope.cards.splice(i, 1);
+					if (!$scope.cards.length) {
+						$('#card-overlay').hide();
+					}
+				}
+			})
+		}
 	}
+
+	$scope.$on('socket_message', function (event, args) {
+		if (event.name == 'socket_message') {
+			console.log(args);
+			if (args.event == 'send_stamps_nearby') {
+				var card = {};
+				card.request_id = args.request_id;
+				card.name = args.consumer_user_data.first_name + ' ' + args.consumer_user_data.last_name;
+				card.image = args.consumer_user_data.fb_image_url;
+				if (args.card_detail.stamps && args.card_detail.total_stamps) {
+					card.stamps = (args.card_detail.stamps / args.card_detail.total_stamps) * 100;
+					card.stamps = card.stamps.toFixed(0);
+				}
+				else {
+					card.stamps = 0;
+				}
+				$scope.$apply(function() {
+					$scope.cards.push(card);
+					$('#card-overlay').show();
+				})
+				console.log($scope.cards);
+			}
+			else if (args.event == 'notify_removal') {
+				$scope.removeCard(args.request_id);
+			}
+		}
+	})
+
 });
