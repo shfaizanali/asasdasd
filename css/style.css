@@ -259,6 +259,10 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 	margin-bottom: 30px;
 }
 
+.remove-btn {
+	background: #8C0935 !important;
+}
+
 .cards-list {
 	overflow: auto;
 	height: calc(100vh - 100px);
@@ -266,6 +270,18 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 
 .hide {
 	display: none;
+}
+
+.stamp-select {
+	background: #e91e63 !important;
+}
+
+.reward-select {
+	background: #ffc107 !important;
+}
+
+.reward-username {
+	color: #3e3c3c;
 }
 
 ::-webkit-scrollbar { 

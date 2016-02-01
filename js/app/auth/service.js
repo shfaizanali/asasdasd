@@ -26,8 +26,21 @@ services.factory('Authentication', function ($q, requestManager, API_URLS) {
 		return deferred.promise;
 	}
 
+	function resetPassword(data) {
+		var deferred = $q.defer();
+		var url = API_URLS.base + API_URLS.forgotPassword;
+		requestManager.post(url, data)
+		.then(function (res) {
+			deferred.resolve(res);
+		}, function (err) {
+			deferred.reject(err);
+		})
+		return deferred.promise;
+	}
+
 	return {
 		login: login,
-		register: register
+		register: register,
+		resetPassword: resetPassword
 	}
 })

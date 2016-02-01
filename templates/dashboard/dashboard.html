@@ -24,7 +24,8 @@
 			Tap a card to select the user
 		</div>
 		<div class="cards-list">
-			<div ng-repeat="card in cards" ng-if="cards.length" class="card-item">
+			<div ng-repeat="card in cards" ng-if="cards.length" class="card-item" id="{{card.request_id}}" ng-click="selectCard(card.request_id, card.type)" ng-dblClick="performAction(card.request_id, card.stamper_id, card.type)"
+			ng-blur="deselectCard(card.request_id)">
 				<div>
 					<img src="{{card.image}}" class="custom-avatar" ng-cloak/>
 					<div class="progress-container">
@@ -34,7 +35,7 @@
 				<div class="username">
 					{{ card.name }}
 				</div>
-				<md-button ng-click="removeCard(card.request_id)" class="full-width">REMOVE CARD</md-button>
+				<md-button ng-click="removeCard(card.request_id)" class="full-width remove-btn">REMOVE CARD</md-button>
 			</div>
 		</div>
 	</div>

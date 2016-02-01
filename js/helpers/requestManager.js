@@ -38,6 +38,27 @@ services.factory('requestManager', function ($q, $http, $httpParamSerializer) {
 				deferred.reject(err);
 			});
 			return deferred.promise;
+		},
+
+		postWithAuthorization: function (url, data) {
+			var deferred = $q.defer();
+			var req = {
+				method: 'POST',
+				url: url,
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					Authorization: 'Token ' + localStorage.getItem('userToken')
+				},
+				data: $.param(data)
+			}
+			$http(req)
+			.success(function (response) {
+				deferred.resolve(response);
+			})
+			.error(function (err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
 		}
 	};
 
