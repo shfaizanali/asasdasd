@@ -110,8 +110,8 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 .photo-icon {
 	fill: #ffffff;
 	position: absolute;
-	margin-left: -24px;
-	margin-top: -114px;
+	margin-left: -22px;
+	margin-top: -126px;
 }
 
 .text-white {
@@ -203,8 +203,8 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 	background: #000000;
 	position: absolute;
 	opacity: 0.5;
-	margin-top: -149px;
-	margin-left: 220px;
+	margin-top: -169px;
+	margin-left: 210px;
 }
 
 .username {
@@ -280,8 +280,26 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 	background: #ffc107 !important;
 }
 
+.action-performed {
+	background: #8bc34a !important;
+}
+
 .reward-username {
 	color: #3e3c3c;
+}
+
+.reward-icon {
+	position: absolute;
+	margin-left: -260px;
+	margin-top: 14px;
+}
+
+.reward-color {
+	fill: #ffc107;
+}
+
+.fill-white {
+	fill: #ffffff;
 }
 
 ::-webkit-scrollbar { 

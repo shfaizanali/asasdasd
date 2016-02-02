@@ -13,7 +13,20 @@ services.factory('DashboardService', function ($q, requestManager, API_URLS) {
 		return deferred.promise;
 	}
 
+	function giveReward(data) {
+		var deferred = $q.defer();
+		var url = API_URLS.base + API_URLS.giveReward;
+		requestManager.postWithAuthorization(url, data)
+		.then(function (res) {
+			deferred.resolve(res);
+		}, function (err) {
+			deferred.reject(err);
+		})
+		return deferred.promise;
+	}
+
 	return {
-		giveStamp: giveStamp
+		giveStamp: giveStamp,
+		giveReward: giveReward
 	}
 })

@@ -17,6 +17,13 @@ dash.controller('DashboardCtrl', function ($scope, $rootScope, DashboardService)
 				card.name = args.consumer_user_data.first_name + ' ' + args.consumer_user_data.last_name;
 				card.stamper_id = args.consumer_user_data.stampr_id;
 				card.image = args.consumer_user_data.fb_image_url;
+				card.product = args.card_detail.product;
+				card.singleClickAction = false;
+				card.doubleClickAction = false;
+				card.selected = false;
+				card.imageShadow = false;
+				card.imageIcon = false;
+				card.imageIconName = 'local_drink';
 				if (args.event == 'send_stamps_nearby') {
 					card.type = 'stamp';
 				}
@@ -30,72 +37,104 @@ dash.controller('DashboardCtrl', function ($scope, $rootScope, DashboardService)
 				else {
 					card.stamps = 0;
 				}
-				$scope.$apply(function() {
+				$scope.$apply( function() {
 					$scope.cards.push(card);
 					$('#card-overlay').show();
 				})
 				console.log($scope.cards);
 			}
 			else if (args.event == 'notify_removal') {
-				$scope.removeCard(args.request_id);
+				if ($scope.cards.length) {
+					$scope.cards.forEach(function (item, i) {
+						if (item.request_id == args.request_id) {
+							$scope.$apply( function() {
+								$scope.cards.splice(i, 1);
+							})
+						}
+					})
+				}
 				$('.dialog-top').html('Tap a card to select the user');
+				if (!$scope.cards.length) {
+					$('#card-overlay').hide();
+				}
 			}
 		}
 	})
 
-	$scope.removeCard = function (request_id) {
-		if ($scope.cards.length) {
-			$scope.cards.forEach(function (item, i) {
-				if (item.request_id == request_id) {
-					$scope.cards.splice(i, 1);
-					if (!$scope.cards.length) {
-						$('#card-overlay').hide();
-					}
-				}
-			})
+	$scope.removeCardAt = function (index) {
+		$scope.cards.splice(index, 1);
+		if (!$scope.cards.length) {
+			$('#card-overlay').hide();
 		}
 	}
 
-	$scope.selectCard = function(request_id, type) {
-		if (type == 'stamp') {
-			$('#'+request_id).addClass('stamp-select');
-			$('#'+request_id+' .username').addClass('text-white');
-			$('.dialog-top').html('Tap again to give stamp (Double tap to give stamp without selecting)');
-		}
-		else if (type == 'reward') {
-			$('.dialog-top').html('Tap again to give reward');
-			$('#'+request_id).addClass('reward-select');
-			$('#'+request_id+' .username').addClass('reward-username');
-		}
-	}
-
-	$scope.performAction = function (request_id, stamper_id, type) {
-		if (type == 'stamp') {
-			var giveStampPacket = {
-				request_id: request_id,
-				stamper_id: stamper_id
+	$scope.selectCard = function(index) {
+		if (!$scope.cards[index].selected) {
+			$scope.cards[index].selected = true;
+			$scope.cards[index].imageShadow = true;
+			$scope.cards[index].imageIcon = true;
+			if ($scope.cards[index].type == 'stamp') {
+				$('#'+$scope.cards[index].request_id).addClass('stamp-select');
+				$('#'+$scope.cards[index].request_id+' .username').addClass('text-white');
+				$('.dialog-top').html('Tap again to give stamp (Double tap to give stamp without selecting)');
 			}
-			DashboardService.giveStamp(giveStampPacket)
+			else if ($scope.cards[index].type == 'reward') {
+				$('.dialog-top').html('Tap again to give reward');
+				$('#'+$scope.cards[index].request_id).addClass('reward-select');
+				$('#'+$scope.cards[index].request_id+' .username').addClass('reward-username');
+			}
+		}
+		else {
+			$scope.performAction(index);
+		}
+	}
+
+	$scope.performAction = function (index) {
+		var requestPacket = {
+			request_id: $scope.cards[index].request_id,
+			stamper_id: $scope.cards[index].stamper_id
+		}
+		if ($scope.cards[index].type == 'stamp') {
+			DashboardService.giveStamp(requestPacket)
 			.then(function (res) {
 				console.log(res);
-				$('#'+request_id).css('background', '#8bc34a');
-				$('#'+request_id+' .username').addClass('text-white');
-				$('#'+request_id+' button').hide();
+				$('#'+$scope.cards[index].request_id).addClass('action-performed');
+				$('#'+$scope.cards[index].request_id+' .username').addClass('text-white');
+				$('#'+$scope.cards[index].request_id+' button').hide();
+				$scope.cards[index].singleClickAction = true;
+				$scope.cards[index].doubleClickAction = true;
+				$scope.cards[index].imageIconName = 'done';
+				$('.dialog-top').html($scope.cards[index].product + ' stamp was given');
 			}, function (err) {
 				console.log(err);
 			})
 		}
-		else if (type == 'reward') {
-			console.log('give reward');
+		else if ($scope.cards[index].type == 'reward') {
+			DashboardService.giveReward(requestPacket)
+			.then(function (res) {
+				console.log(res);
+				$('#'+$scope.cards[index].request_id).addClass('action-performed');
+				$('#'+$scope.cards[index].request_id+' .username').removeClass('reward-username');
+				$('#'+$scope.cards[index].request_id+' .username').addClass('text-white');
+				$('#'+$scope.cards[index].request_id+' button').hide();
+				$scope.cards[index].singleClickAction = true;
+				$scope.cards[index].doubleClickAction = true;
+				$scope.cards[index].imageIconName = 'done';
+				$('.dialog-top').html('Free ' + $scope.cards[index].product + ' is now available');
+			}, function (err) {
+				console.log(err);
+			})
 		}
 	}
 
-	$scope.deselectCard = function (request_id) {
+	$scope.deselectCard = function (request_id, index) {
+		$scope.cards[index].selected = false;
+		$scope.cards[index].imageShadow = false;
+		$scope.cards[index].imageIcon = false;
 		$('#'+request_id).removeClass('stamp-select');
 		$('#'+request_id).removeClass('reward-select');
 		$('#'+request_id+' .username').removeClass('text-white');
 		$('#'+request_id+' .username').removeClass('reward-username');
-		$('.dialog-top').html('Tap a card to select the user');
 	}
 
 });

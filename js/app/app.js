@@ -14,12 +14,13 @@ module = angular.module('manager', [
 module.constant('WS_URL', 'ws://staging.api.stamprapp.com:8500');
 
 module.constant('API_URLS', {
-	base: 'http://0.0.0.0:8000/',
-	// base: 'http://staging.api.stamprapp.com/',
+	// base: 'http://0.0.0.0:8000/',
+	base: 'http://staging.api.stamprapp.com/',
 	login: 'login/business/',
 	register: 'accounts/register/manager/',
 	forgotPassword: 'accounts/forget_password/',
-	giveStamp: 'api-give/stamp/'
+	giveStamp: 'api-give/stamp/',
+	giveReward: 'api-give/reward/'
 });
 
 module.run(function (socket) {

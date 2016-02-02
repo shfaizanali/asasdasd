@@ -51,11 +51,22 @@ auth.controller('LoginCtrl', function ($scope, $state, Authentication) {
 	}
 });
 
-auth.controller('forgotPasswordCtrl', function ($scope) {
+auth.controller('forgotPasswordCtrl', function ($scope, Authentication) {
 	$scope.passwordData = {};
+	$scope.showLoader = false;
+	$scope.serverMessage = "";
 
 	$scope.doRequestNewPassword = function () {
 		console.log($scope.passwordData);
-		console.log('function: doRequestNewPassword');
+		$scope.showLoader = true;
+		Authentication.resetPassword($scope.passwordData)
+		.then (function (res) {
+			$scope.showLoader = false;
+			$scope.serverMessage = res.message;
+			console.log(res);
+		}, function (err) {
+			$scope.showLoader = false;
+			console.log(err);
+		})
 	}
 });
