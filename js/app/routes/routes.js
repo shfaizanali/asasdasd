@@ -13,7 +13,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('dashboard', {
 			url: "/dashboard",
 			controller:'DashboardCtrl',
-			templateUrl: "templates/dashboard/dashboard.html"
+			templateUrl: "templates/dashboard/dashboard.html",
+			resolve: {
+				quote: function (DashboardService) {
+					return DashboardService.getQuote();
+				}
+			}
 		})
 
 		.state('forgotPassword', {

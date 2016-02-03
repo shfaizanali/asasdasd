@@ -25,8 +25,21 @@ services.factory('DashboardService', function ($q, requestManager, API_URLS) {
 		return deferred.promise;
 	}
 
+	function getQuote() {
+		var deferred = $q.defer();
+		var url = API_URLS.base + API_URLS.quotes;
+		requestManager.getWithAuthorization(url, {})
+		.then(function (res) {
+			deferred.resolve(res);
+		}, function (err) {
+			deferred.reject(err);
+		})
+		return deferred.promise;
+	}
+
 	return {
 		giveStamp: giveStamp,
-		giveReward: giveReward
+		giveReward: giveReward,
+		getQuote: getQuote
 	}
 })

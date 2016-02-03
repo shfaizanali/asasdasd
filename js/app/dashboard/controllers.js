@@ -1,8 +1,13 @@
 var dash = angular.module('dash.controllers', []);
 
-dash.controller('DashboardCtrl', function ($scope, $rootScope, DashboardService) {
+dash.controller('DashboardCtrl', function ($scope, $rootScope, DashboardService, quote) {
 	$scope.userProgress = 80;
 	$scope.cards = [];
+	$scope.quote = "No quote for today";
+	console.log(quote);
+	if (quote.results.length) {
+		$scope.quote = quote.results[0].description;
+	}
 
 	$scope.showDialog = function (ev) {
 		// $('#card-overlay').show();

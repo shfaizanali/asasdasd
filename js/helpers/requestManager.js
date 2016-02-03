@@ -20,6 +20,26 @@ services.factory('requestManager', function ($q, $http, $httpParamSerializer) {
 			return deferred.promise;
 		},
 
+		getWithAuthorization: function (url, data) {
+			var deferred = $q.defer();
+			var req = {
+				method: 'GET',
+				url: url,
+				headers: {
+					Authorization: 'Token ' + localStorage.getItem('userToken')
+				},
+				data: $.param(data)
+			}
+			$http(req)
+			.success(function (response) {
+				deferred.resolve(response);
+			})
+			.error(function (err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		},
+
 		post: function (url, data) {
 			var deferred = $q.defer();
 			var req = {

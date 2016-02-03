@@ -20,7 +20,8 @@ module.constant('API_URLS', {
 	register: 'accounts/register/manager/',
 	forgotPassword: 'accounts/forget_password/',
 	giveStamp: 'api-give/stamp/',
-	giveReward: 'api-give/reward/'
+	giveReward: 'api-give/reward/',
+	quotes: 'quotes/'
 });
 
 module.run(function (socket) {
